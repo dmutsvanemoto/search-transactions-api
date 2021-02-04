@@ -28,5 +28,6 @@ The OPEN API documentation can be accessed at `http://localhost:5000/swagger/ind
 
 ## Notes
 
+- If you are consistently getting a 500 error result for a search then you may have to [increase the vm.max_map_count to at least 262144](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_set_vm_max_map_count_to_at_least_262144). I have yet to figure out how ensure this doesn't occur when spinning up elasticsearch.
 - You can reset the elasticsearch data by deleting the esdata folder that get created in the root of the project.
 - There is a bug around retrieving a merchant name for a given description where searching for a description that doesn't exist but contains words that other descriptions have the search endpoint will return the closest matching merchant
