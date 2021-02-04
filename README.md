@@ -8,7 +8,6 @@ THere API will preload some sample data. You can use the sample.csv to get an id
 - You can also add a new description/merchant via `PUT / api/search`.
     The payload contract can be found in the OPEN API doc located at `http://localhost:5000/swagger/index.html`
 
-
 ## Getting Up and running
 
 The following two steps are prerequisites to installation
@@ -30,3 +29,4 @@ The OPEN API documentation can be accessed at `http://localhost:5000/swagger/ind
 ## Notes
 
 - You can reset the elasticsearch data by deleting the esdata folder that get created in the root of the project.
+- There is a bug around retrieving a merchant name for a given description where searching for a description that doesn't exist but contains words that other descriptions have the search endpoint will return the closest matching merchant
