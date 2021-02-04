@@ -14,8 +14,9 @@ The following two steps are prerequisites to installation
 - Install and setup
 - Install [dotnet 5 SDK](https://dotnet.microsoft.com/download)
 
-1. Run `dotnet build ./Transactions.API.sln` at root of project
-2. Run `docker-compose up`
+1. Run `dotnet build ./Transactions.API.sln` at root of the project
+2. Create a folder called `esdata` at the root of the project
+3. Run `docker-compose up`
     - This will spin up the following
         - Transactions API on `http://localhost:5000`
         - ElasticSearch on `http://localhost:9200`
