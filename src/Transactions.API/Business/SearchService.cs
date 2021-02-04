@@ -22,7 +22,7 @@ namespace Transactions.API.Business
 
         public async Task CreateMerchantDescriptionAsync(MerchantDescription merchantDescription)
         {
-            var merchant = string.IsNullOrWhiteSpace(merchantDescription.Merchant) ? "unknown" : merchantDescription.Description;
+            var merchant = string.IsNullOrWhiteSpace(merchantDescription.Merchant) ? "unknown" : merchantDescription.Merchant;
             var create = new MerchantDescription(merchantDescription.Description, merchant);
 
             await _repository.CreateAsync(create);
