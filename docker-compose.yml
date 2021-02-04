@@ -1,40 +1,40 @@
 version: '3.8'
 
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    container_name: elastic
+    environment:
+      - node.name=elastic
+      - cluster.initial_master_nodes=elastic
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - type: bind
+        source: ./esdata
+        target: /usr/share/elasticsearch/data
+    networks:
+      - esnetwork
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    ports:
+      - "5601:5601"
+    networks:
+      - esnetwork
+    depends_on:
+      - elasticsearch
   transactions-api:
     image: ${DOCKER_REGISTRY-}transactionsapi
     build:
       context: .
       dockerfile: src/Transactions.API/Dockerfile
     environment:
-        - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
       - "5000:80"
     networks:
         - esnetwork
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
-    container_name: elastic
-    environment:
-        - node.name=elastic
-        - cluster.initial_master_nodes=elastic
-    ports:
-        - "9200:9200"
-        - "9300:9300"
-    volumes:
-        - type: bind
-          source: ./esdata
-          target: /usr/share/elasticsearch/data
-    networks:
-        - esnetwork
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.10.2
-    ports:
-        - "5601:5601"
-    networks:
-        - esnetwork
-    depends_on:
-        - elasticsearch
 volumes:
     esdata:
 networks:
